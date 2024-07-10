@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\KategoriController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,5 +26,8 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['prefix' => 'main'], function () {
     Route::get('/', function () {
         return view('dashboards.index');
+    });
+    Route::group(['prefix' => 'kategori'], function() {
+        Route::get('/', [KategoriController::class, 'index']);
     });
 });
