@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
-@section('title', 'Kategori')
+@section('title', 'Barang')
 
 @section('content')
 <div class="col-lg-12">
     <div class="card">
         <div class="card-body">
-          <h3 class="card-title">Kategori Barang <button type="button" data-bs-toggle="modal" data-bs-target="#addKategori" class="btn btn-block btn-success btn-sm float-end"><i class="bi bi-plus-square"></i> Kategori</button></h3>
+          <h3 class="card-title">Barang <button type="button" data-bs-toggle="modal" data-bs-target="#addKategori" class="btn btn-block btn-success btn-sm float-end"><i class="bi bi-plus-square"></i> Barang</button></h3>
           <div class="modal fade" id="addKategori" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <form>
                   <div class="modal-header">
-                    <h5 class="modal-title">Tambah Kategori</h5>
+                    <h5 class="modal-title">Tambah Barang</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -42,7 +42,7 @@
               <div class="modal-content">
                 <form>
                   <div class="modal-header">
-                    <h5 class="modal-title">Edit Kategori</h5>
+                    <h5 class="modal-title">Edit Barang</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -73,25 +73,25 @@
           <table class="table datatable table-responsive responsive">
             <thead>
               <tr>
-                <th data-type="string"><b>Kode</b> Kategori</th>
-                <th>Nama Kategori</th>
+                <th data-type="number">No.</th>
+                <th>Kategori</th>
+                <th>Sub Kategori</th>
+                <th>Nama Barang</th>
+                <th>Merk</th>
+                <th>Tahun Perolehan</th>
+                <th>Foto</th>
                 <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>ACW-13000</td>
-                <td>Meja</td>
-                <td><button type="button" data-bs-toggle="modal" data-bs-target="#editKategori" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button></td>
-              </tr>
-              <tr>
-                <td>CW-14000</td>
-                <td>Kursi</td>
-                <td><button type="button" data-bs-toggle="modal" data-bs-target="#editKategori" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button></td>
-              </tr>
-              <tr>
-                <td>ACW-41000</td>
-                <td>TV</td>
+                <td>1</td>
+                <td>Elektronik</td>
+                <td>Televisi</td>
+                <td>LG 32"</td>
+                <td>LG</td>
+                <td>2019</td>
+                <td><img src="https://www.lg.com/content/dam/channel/wcms/id/images/tv/32lq570bpsa_ati_eain_id_c/gallery/DZ-01.jpg" alt="Televisi LG 32" class="img-fluid" width="100"></td>
                 <td><button type="button" data-bs-toggle="modal" data-bs-target="#editKategori" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button></td>
               </tr>
             </tbody>

@@ -1,31 +1,31 @@
 @extends('layouts.app')
 
-@section('title', 'Kategori')
+@section('title', 'Sub Kategori')
 
 @section('content')
 <div class="col-lg-12">
     <div class="card">
         <div class="card-body">
-          <h3 class="card-title">Kategori Barang <button type="button" data-bs-toggle="modal" data-bs-target="#addKategori" class="btn btn-block btn-success btn-sm float-end"><i class="bi bi-plus-square"></i> Kategori</button></h3>
+          <h3 class="card-title">Sub Kategori Barang <button type="button" data-bs-toggle="modal" data-bs-target="#addKategori" class="btn btn-block btn-success btn-sm float-end"><i class="bi bi-plus-square"></i> Sub Kategori</button></h3>
           <div class="modal fade" id="addKategori" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <form>
                   <div class="modal-header">
-                    <h5 class="modal-title">Tambah Kategori</h5>
+                    <h5 class="modal-title">Tambah Sub Kategori</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
                       <div class="row mb-3">
-                        <label for="kodeKategori" class="col-sm-4 col-form-label">Kode Kategori</label>
+                        <label for="kodeSubKategori" class="col-sm-4 col-form-label">Kode Sub Kategori</label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" id="kodeKategori" placeholder="CW-13000.">
+                          <input type="text" class="form-control" id="kodeSubKategori" placeholder="CW-13000.">
                         </div>
                       </div>
                       <div class="row mb-3">
-                        <label for="namaKategori" class="col-sm-4 col-form-label">Nama Kategori</label>
+                        <label for="namaSubKategori" class="col-sm-4 col-form-label">Nama Sub Kategori</label>
                         <div class="col-sm-8">
-                          <input type="email" class="form-control" id="namaKategori" placeholder="Meja">
+                          <input type="email" class="form-control" id="namSubKategori" placeholder="Meja">
                         </div>
                       </div>
                   </div>
@@ -42,7 +42,7 @@
               <div class="modal-content">
                 <form>
                   <div class="modal-header">
-                    <h5 class="modal-title">Edit Kategori</h5>
+                    <h5 class="modal-title">Edit Sub Kategori</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -74,7 +74,7 @@
             <thead>
               <tr>
                 <th data-type="string"><b>Kode</b> Kategori</th>
-                <th>Nama Kategori</th>
+                <th>Nama Sub Kategori</th>
                 <th>Aksi</th>
               </tr>
             </thead>

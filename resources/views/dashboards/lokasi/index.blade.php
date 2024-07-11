@@ -6,7 +6,7 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-body">
-          <h3 class="card-title">Kategori Barang <button type="button" data-bs-toggle="modal" data-bs-target="#addKategori" class="btn btn-block btn-success btn-sm float-end"><i class="bi bi-plus-square"></i> Kategori</button></h3>
+          <h3 class="card-title">Lokasi Barang <button type="button" data-bs-toggle="modal" data-bs-target="#addKategori" class="btn btn-block btn-success btn-sm float-end"><i class="bi bi-plus-square"></i> Kategori</button></h3>
           <div class="modal fade" id="addKategori" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">

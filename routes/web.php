@@ -3,6 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\SubkategoriController;
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\SatuanController;
+use App\Http\Controllers\LokasiController;
+use App\Http\Controllers\PenggunaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +34,20 @@ Route::group(['prefix' => 'main'], function () {
     });
     Route::group(['prefix' => 'kategori'], function() {
         Route::get('/', [KategoriController::class, 'index']);
+    });
+    Route::group(['prefix' => 'subkategori'], function() {
+        Route::get('/', [SubkategoriController::class, 'index']);
+    });
+    Route::group(['prefix' => 'barang'], function() {
+        Route::get('/', [BarangController::class, 'index']);
+    });
+    Route::group(['prefix' => 'satuan'], function() {
+        Route::get('/', [SatuanController::class, 'index']);
+    });
+    Route::group(['prefix' => 'lokasi'], function() {
+        Route::get('/', [LokasiController::class, 'index']);
+    });
+    Route::group(['prefix' => 'pengguna'], function() {
+        Route::get('/', [PenggunaController::class, 'index']);
     });
 });
