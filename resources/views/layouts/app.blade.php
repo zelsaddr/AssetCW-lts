@@ -196,7 +196,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="index.html">
+        <a class="nav-link " href="{{ url('main') }}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -208,27 +208,27 @@
         </a>
         <ul id="datamaster-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-alerts.html">
+            <a href="{{ url('main/kategori') }}">
               <i class="bi bi-circle"></i><span>Kategori Barang</span>
             </a>
           </li>
           <li>
-            <a href="components-accordion.html">
+            <a href="{{ url('main/subkategori') }}">
               <i class="bi bi-circle"></i><span>Sub Kategori</span>
             </a>
           </li>
           <li>
-            <a href="components-badges.html">
+            <a href="{{ url('main/barang') }}">
               <i class="bi bi-circle"></i><span>Barang</span>
             </a>
           </li>
           <li>
-            <a href="components-breadcrumbs.html">
+            <a href="{{ url('main/satuan') }}">
               <i class="bi bi-circle"></i><span>Satuan</span>
             </a>
           </li>
           <li>
-            <a href="components-breadcrumbs.html">
+            <a href="{{ url('main/lokasi') }}">
               <i class="bi bi-circle"></i><span>Lokasi Aset</span>
             </a>
           </li>
