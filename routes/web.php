@@ -29,25 +29,25 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::group(['prefix' => 'main'], function () {
-    Route::get('/', function () {
-        return view('dashboards.index');
-    });
-    Route::group(['prefix' => 'kategori'], function() {
-        Route::get('/', [KategoriController::class, 'index']);
-    });
-    Route::group(['prefix' => 'subkategori'], function() {
-        Route::get('/', [SubkategoriController::class, 'index']);
-    });
-    Route::group(['prefix' => 'barang'], function() {
-        Route::get('/', [BarangController::class, 'index']);
-    });
-    Route::group(['prefix' => 'satuan'], function() {
-        Route::get('/', [SatuanController::class, 'index']);
-    });
-    Route::group(['prefix' => 'lokasi'], function() {
-        Route::get('/', [LokasiController::class, 'index']);
-    });
-    Route::group(['prefix' => 'pengguna'], function() {
-        Route::get('/', [PenggunaController::class, 'index']);
+    // Data Master Routes
+    Route::group(['prefix' => 'datamaster'], function() {
+        Route::get('/', function () {
+            return view('dashboards.index');
+        });
+        Route::group(['prefix' => 'kategori'], function() {
+            Route::get('/', [KategoriController::class, 'index']);
+        });
+        Route::group(['prefix' => 'barang'], function() {
+            Route::get('/', [BarangController::class, 'index']);
+        });
+        Route::group(['prefix' => 'satuan'], function() {
+            Route::get('/', [SatuanController::class, 'index']);
+        });
+        Route::group(['prefix' => 'lokasi'], function() {
+            Route::get('/', [LokasiController::class, 'index']);
+        });
+        Route::group(['prefix' => 'pengguna'], function() {
+            Route::get('/', [PenggunaController::class, 'index']);
+        });
     });
 });

@@ -24,10 +24,13 @@
   <link href="{{ url('assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
   <link href="{{ url('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
   <link href="{{ url('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
-  <link href="{{ url('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+  {{-- <link href="{{ url('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet"> --}}
+  <link href="{{ url('assets/css/select2.min.css') }}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
+  <link href="{{ url('assets/css/datatables.min.css') }}" rel="stylesheet">
   <link href="{{ url('assets/css/style.css') }}" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js" integrity="sha512-qzrZqY/kMVCEYeu/gCm8U2800Wz++LTGK4pitW/iswpCbjwxhsmUwleL1YXaHImptCHG0vJwU7Ly7ROw3ZQoww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   @yield('styles')
 
 </head>
@@ -196,40 +199,40 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="{{ url('main') }}">
+        <a class="nav-link collapsed" href="{{ url('main') }}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#datamaster-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link" data-bs-target="#datamaster-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-link"></i><span>Data Master</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="datamaster-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="datamaster-nav" class="nav-content collapse {{ Request::is('main/datamaster/*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="{{ url('main/kategori') }}">
+            <a href="{{ url('main/datamaster/kategori') }}" class="{{ Request::is('*/kategori') ? 'active' : '' }}">
               <i class="bi bi-circle"></i><span>Kategori Barang</span>
             </a>
           </li>
           <li>
-            <a href="{{ url('main/subkategori') }}">
-              <i class="bi bi-circle"></i><span>Sub Kategori</span>
-            </a>
-          </li>
-          <li>
-            <a href="{{ url('main/barang') }}">
+            <a href="{{ url('main/datamaster/barang') }}" class="{{ Request::is('*/barang') ? 'active' : '' }}">
               <i class="bi bi-circle"></i><span>Barang</span>
             </a>
           </li>
           <li>
-            <a href="{{ url('main/satuan') }}">
+            <a href="{{ url('main/datamaster/satuan') }}" class="{{ Request::is('*/satuan') ? 'active' : '' }}">
               <i class="bi bi-circle"></i><span>Satuan</span>
             </a>
           </li>
           <li>
-            <a href="{{ url('main/lokasi') }}">
+            <a href="{{ url('main/datamaster/lokasi') }}" class="{{ Request::is('*/lokasi') ? 'active' : '' }}">
               <i class="bi bi-circle"></i><span>Lokasi Aset</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ url('main/datamaster/pengguna') }}" class="{{ Request::is('*/pengguna') ? 'active' : '' }}">
+              <i class="bi bi-circle"></i><span>Pengguna</span>
             </a>
           </li>
         </ul>
@@ -318,11 +321,13 @@
   <script src="{{ url('assets/vendor/chart.js/chart.umd.js') }}"></script>
   <script src="{{ url('assets/vendor/echarts/echarts.min.js') }}"></script>
   <script src="{{ url('assets/vendor/quill/quill.js') }}"></script>
-  <script src="{{ url('assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
+  {{-- <script src="{{ url('assets/vendor/simple-datatables/simple-datatables.js') }}"></script> --}}
   <script src="{{ url('assets/vendor/tinymce/tinymce.min.js') }}"></script>
   <script src="{{ url('assets/vendor/php-email-form/validate.js') }}"></script>
 
   <!-- Template Main JS File -->
+  <script src="{{ url('assets/js/select2.min.js') }}"></script>
+  <script src="{{ url('assets/js/datatables.min.js') }}"></script>
   <script src="{{ url('assets/js/main.js') }}"></script>
 
 </body>

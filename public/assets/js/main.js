@@ -309,9 +309,13 @@
      */
     const datatables = select(".datatable", true);
     datatables.forEach((datatable) => {
-        new simpleDatatables.DataTable(datatable, {
+        datatable;
+        new DataTable(datatable, {
             searchable: true,
             perPageSelect: [5, 10, 15, ["All", -1]],
+            language: {
+                sSearch: "Cari:",
+            },
         });
     });
 
@@ -328,4 +332,13 @@
             }).observe(mainContainer);
         }, 200);
     }
+
+    $(".select2-add").select2({
+        dropdownParent: $("#addItem"),
+        width: "100%",
+    });
+    $(".select2-edit").select2({
+        dropdownParent: $("#editItem"),
+        width: "100%",
+    });
 })();

@@ -1,31 +1,25 @@
 @extends('layouts.app')
 
-@section('title', 'Kategori')
+@section('title', 'Satuan')
 
 @section('content')
 <div class="col-lg-12">
     <div class="card">
         <div class="card-body">
-          <h3 class="card-title">Satuan Barang <button type="button" data-bs-toggle="modal" data-bs-target="#addKategori" class="btn btn-block btn-success btn-sm float-end"><i class="bi bi-plus-square"></i> Kategori</button></h3>
-          <div class="modal fade" id="addKategori" tabindex="-1">
+          <h3 class="card-title">Satuan Barang <button type="button" data-bs-toggle="modal" data-bs-target="#addSatuan" class="btn btn-block btn-success btn-sm float-end"><i class="bi bi-plus-square"></i> Satuan</button></h3>
+          <div class="modal fade" id="addSatuan" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <form>
                   <div class="modal-header">
-                    <h5 class="modal-title">Tambah Kategori</h5>
+                    <h5 class="modal-title">Tambah Satuan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
                       <div class="row mb-3">
-                        <label for="kodeKategori" class="col-sm-4 col-form-label">Kode Kategori</label>
+                        <label for="namaSatuan" class="col-sm-4 col-form-label">Nama Satuan</label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" id="kodeKategori" placeholder="CW-13000.">
-                        </div>
-                      </div>
-                      <div class="row mb-3">
-                        <label for="namaKategori" class="col-sm-4 col-form-label">Nama Kategori</label>
-                        <div class="col-sm-8">
-                          <input type="email" class="form-control" id="namaKategori" placeholder="Meja">
+                          <input type="email" class="form-control" id="namaSatuan" placeholder="Unit">
                         </div>
                       </div>
                   </div>
@@ -36,26 +30,20 @@
               </form>
               </div>
             </div>
-          </div><!-- End Add Kategori Modal-->
-          <div class="modal fade" id="editKategori" tabindex="-1">
+          </div><!-- End Add Satuan Modal-->
+          <div class="modal fade" id="editSatuan" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <form>
                   <div class="modal-header">
-                    <h5 class="modal-title">Edit Kategori</h5>
+                    <h5 class="modal-title">Edit Satuan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
                       <div class="row mb-3">
-                        <label for="kodeKategori" class="col-sm-4 col-form-label">Kode Kategori</label>
+                        <label for="namaSatuan" class="col-sm-4 col-form-label">Nama Satuan</label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" id="kodeKategori" placeholder="CW-13000.">
-                        </div>
-                      </div>
-                      <div class="row mb-3">
-                        <label for="namaKategori" class="col-sm-4 col-form-label">Nama Kategori</label>
-                        <div class="col-sm-8">
-                          <input type="email" class="form-control" id="namaKategori" placeholder="Meja">
+                          <input type="email" class="form-control" id="namaSatuan" placeholder="Unit">
                         </div>
                       </div>
                   </div>
@@ -66,33 +54,29 @@
               </form>
               </div>
             </div>
-          </div><!-- End Add Kategori Modal-->
-          <p>Semua kategori barang akan ditampilkan di sini.</p>
+          </div><!-- End Add Satuan Modal-->
+          <p>Semua satuan barang akan ditampilkan di sini.</p>
           <hr>
           <!-- Table with stripped rows -->
-          <table class="table datatable table-responsive responsive">
+          <table class="table table-bordered table-striped datatable table-responsive responsive">
             <thead>
               <tr>
-                <th data-type="string"><b>Kode</b> Kategori</th>
-                <th>Nama Kategori</th>
+                <th>Nama Satuan</th>
                 <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>ACW-13000</td>
-                <td>Meja</td>
-                <td><button type="button" data-bs-toggle="modal" data-bs-target="#editKategori" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button></td>
+                <td>Unit</td>
+                <td><button type="button" data-bs-toggle="modal" data-bs-target="#editSatuan" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button></td>
               </tr>
               <tr>
-                <td>CW-14000</td>
-                <td>Kursi</td>
-                <td><button type="button" data-bs-toggle="modal" data-bs-target="#editKategori" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button></td>
+                <td>Buah</td>
+                <td><button type="button" data-bs-toggle="modal" data-bs-target="#editSatuan" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button></td>
               </tr>
               <tr>
-                <td>ACW-41000</td>
-                <td>TV</td>
-                <td><button type="button" data-bs-toggle="modal" data-bs-target="#editKategori" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button></td>
+                <td>Lembar</td>
+                <td><button type="button" data-bs-toggle="modal" data-bs-target="#editSatuan" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button></td>
               </tr>
             </tbody>
           </table>

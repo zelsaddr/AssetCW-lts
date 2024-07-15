@@ -70,7 +70,7 @@
           <p>Semua kategori barang akan ditampilkan di sini.</p>
           <hr>
           <!-- Table with stripped rows -->
-          <table class="table datatable table-responsive responsive">
+          <table class="table table-bordered table-striped datatable table-responsive responsive">
             <thead>
               <tr>
                 <th data-type="string"><b>Kode</b> Kategori</th>
