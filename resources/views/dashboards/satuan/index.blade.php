@@ -78,6 +78,10 @@
                 <td>Lembar</td>
                 <td><button type="button" data-bs-toggle="modal" data-bs-target="#editSatuan" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button></td>
               </tr>
+              <tr>
+                <td>Meter</td>
+                <td><button type="button" data-bs-toggle="modal" data-bs-target="#editSatuan" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button></td>
+              </tr>
             </tbody>
           </table>
           <!-- End Table with stripped rows -->

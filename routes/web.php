@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AsetBerwujud;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KategoriController;
@@ -8,6 +9,9 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\AsetBerwujudController;
+use App\Http\Controllers\AsetDihapuskanController;
+use App\Http\Controllers\DokumenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +34,9 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['prefix' => 'main'], function () {
     // Data Master Routes
+    Route::get('/', function () {
+        return view('dashboards.index');
+    });
     Route::group(['prefix' => 'datamaster'], function() {
         Route::get('/', function () {
             return view('dashboards.index');
@@ -48,6 +55,21 @@ Route::group(['prefix' => 'main'], function () {
         });
         Route::group(['prefix' => 'pengguna'], function() {
             Route::get('/', [PenggunaController::class, 'index']);
+        });
+    });
+    // aset Routes
+    Route::group(['prefix' => 'aset'], function() {
+        Route::group(['prefix' => 'berwujud'], function() {
+            Route::get('/', [AsetBerwujudController::class, 'index']);
+        });
+        Route::group(['prefix' => 'dihapuskan'], function() {
+            Route::get('/', [AsetDihapuskanController::class, 'index']);
+        });
+    });
+    // dokumen Routes
+    Route::group(['prefix' => 'dokumen'], function() {
+        Route::group(['prefix' => 'pengadaan'], function() {
+            Route::get('/', [DokumenController::class, 'index']);
         });
     });
 });

@@ -199,14 +199,14 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ url('main') }}">
+        <a class="nav-link {{ Request::is('main') ? 'active' : '' }}" href="{{ url('main') }}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link" data-bs-target="#datamaster-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link {{ Request::is('main/datamaster/*') ? '' : 'collapsed' }}" data-bs-target="#datamaster-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-link"></i><span>Data Master</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="datamaster-nav" class="nav-content collapse {{ Request::is('main/datamaster/*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
@@ -239,17 +239,17 @@
       </li><!-- End Data Master Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#dataaset-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link {{ Request::is('main/aset/*') ? '' : 'collapsed' }}" data-bs-target="#dataaset-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-list-task"></i><span>Data Aset</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="dataaset-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="dataaset-nav" class="nav-content collapse {{ Request::is('main/aset/*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-alerts.html">
+            <a href="{{ url('main/aset/berwujud') }}" class="{{ Request::is('*/berwujud') ? 'active' : '' }}">
               <i class="bi bi-circle"></i><span>Berwujud</span>
             </a>
           </li>
           <li>
-            <a href="components-accordion.html">
+            <a href="{{ url('main/aset/dihapuskan') }}" class="{{ Request::is('*/dihapuskan') ? 'active' : '' }}">
               <i class="bi bi-circle"></i><span>Dihapuskan</span>
             </a>
           </li>
@@ -257,12 +257,12 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#dokumen-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link {{ Request::is('main/dokumen/*') ? '' : 'collapsed' }}" data-bs-target="#dokumen-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-box-seam"></i><span>Dokumen</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="dokumen-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="dokumen-nav" class="nav-content collapse {{ Request::is('main/dokumen/*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-alerts.html">
+            <a href="{{ url('main/dokumen/pengadaan')}}" class="{{ Request::is('*/pengadaan') ? 'active' : '' }}">
               <i class="bi bi-circle"></i><span>Pengadaan</span>
             </a>
           </li>
