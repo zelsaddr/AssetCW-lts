@@ -3,11 +3,41 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Kategori;
 
 class KategoriController extends Controller
 {
     public function index()
     {
-        return view('dashboards.kategori.index');
+        $kategoris = Kategori::all();
+        return view('dashboards.kategori.index', compact('kategoris'));
+    }
+    public function store()
+    {
+        $data = request()->validate([
+            'kode_kategori' => 'required',
+            'nama_kategori' => 'required'
+        ]);
+        Kategori::create($data);
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil ditambahkan');
+    }
+
+    public function update(Request $request)
+    {
+        $data = request()->validate([
+            'kode_kategori' => 'required',
+            'nama_kategori' => 'required'
+        ]);
+        // find or fail and return
+        $kategori = Kategori::findOrFail($request->id);
+        $kategori->update($data);
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diubah');
+    }
+
+    public function destroy(Request $request)
+    {
+        $kategori = Kategori::findOrFail($request->id);
+        $kategori->delete();
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil dihapus');
     }
 }

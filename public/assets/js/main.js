@@ -311,6 +311,7 @@
     datatables.forEach((datatable) => {
         datatable;
         new DataTable(datatable, {
+            fixedHeader: true,
             searchable: true,
             perPageSelect: [5, 10, 15, ["All", -1]],
             language: {

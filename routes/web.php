@@ -41,18 +41,31 @@ Route::group(['prefix' => 'main'], function () {
         Route::get('/', function () {
             return view('dashboards.index');
         });
+        
+        // kategori Routes
         Route::group(['prefix' => 'kategori'], function() {
-            Route::get('/', [KategoriController::class, 'index']);
+            Route::get('/', [KategoriController::class, 'index'])->name('kategori.index');
+            Route::post('/store', [KategoriController::class, 'store'])->name('kategori.store');
+            Route::post('/update', [KategoriController::class, 'update'])->name('kategori.update');
+            Route::delete('/delete/{id}', [KategoriController::class, 'destroy'])->name('kategori.delete');
         });
+
+        // subkategori Routes
         Route::group(['prefix' => 'barang'], function() {
             Route::get('/', [BarangController::class, 'index']);
         });
+
+        // satuan Routes
         Route::group(['prefix' => 'satuan'], function() {
             Route::get('/', [SatuanController::class, 'index']);
         });
+
+        // lokasi Routes
         Route::group(['prefix' => 'lokasi'], function() {
             Route::get('/', [LokasiController::class, 'index']);
         });
+
+        // pengguna Routes
         Route::group(['prefix' => 'pengguna'], function() {
             Route::get('/', [PenggunaController::class, 'index']);
         });
