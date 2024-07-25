@@ -47,7 +47,7 @@ Route::group(['prefix' => 'main'], function () {
             Route::get('/', [KategoriController::class, 'index'])->name('kategori.index');
             Route::post('/store', [KategoriController::class, 'store'])->name('kategori.store');
             Route::post('/update', [KategoriController::class, 'update'])->name('kategori.update');
-            Route::delete('/delete/{id}', [KategoriController::class, 'destroy'])->name('kategori.delete');
+            Route::get('/delete/{id}', [KategoriController::class, 'destroy'])->name('kategori.delete');
         });
 
         // subkategori Routes

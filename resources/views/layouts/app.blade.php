@@ -328,6 +328,7 @@
   <script src="{{ url('assets/js/select2.min.js') }}"></script>
   <script src="{{ url('assets/js/datatables.min.js') }}"></script>
   <script src="{{ url('assets/js/notify.min.js') }}"></script>
+  <script src="{{ url('assets/js/sweetalert.min.js')}}"></script>
   <script src="{{ url('assets/js/main.js') }}"></script>
   @yield('scripts')
   

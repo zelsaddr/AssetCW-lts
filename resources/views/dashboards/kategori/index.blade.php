@@ -105,6 +105,9 @@
                 <td>{{ $kategori['updated_at'] }}</td>
                 <td>
                   <button type="button" data-bs-toggle="modal" data-id="{{ $kategori['id'] }}" data-bs-target="#editKategori" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button>
+                  {{-- delete using a href with confirmation button --}}
+
+                  <a href="{{ route('kategori.delete', $kategori['id']) }}" class="btn btn-danger btn-sm delete" onclick="return confirm('Apakah yakin ingin di hapus')"><i class="bi bi-trash"></i></a>
                 </td>
               </tr>
               @endforeach
@@ -131,6 +134,28 @@
       modal.find('.modal-body input[name="id"]').val(ids);
       modal.find('.modal-body #kodeKategori').val(kodeKategori);
       modal.find('.modal-body #namaKategori').val(namaKategori);
+    });
+
+    // delete kategori with confirmation pop up basic 
+    $('#delete').on('click', function (e) {
+      var form = $(this).closest('form');
+      e.preventDefault();
+      alert('Data yang dihapus tidak dapat dikembalikan!');
+      // basic confirmation pop up using sweetalert2
+      // Swal.fire({
+      //   title: 'Apakah Anda Yakin?',
+      //   text: "Data yang dihapus tidak dapat dikembalikan!",
+      //   icon: 'warning',
+      //   showCancelButton: true,
+      //   confirmButtonColor: '#3085d6',
+      //   cancelButtonColor: '#d33',
+      //   confirmButtonText: 'Ya, Hapus!',
+      //   cancelButtonText: 'Batal'
+      // }).then((result) => {
+      //   if (result.isConfirmed) {
+      //     form.submit();
+      //   }
+      // });
     });
   });
 </script>
