@@ -57,7 +57,10 @@ Route::group(['prefix' => 'main'], function () {
 
         // satuan Routes
         Route::group(['prefix' => 'satuan'], function() {
-            Route::get('/', [SatuanController::class, 'index']);
+            Route::get('/', [SatuanController::class, 'index'])->name('satuan.index');
+            Route::post('/store', [SatuanController::class, 'store'])->name('satuan.store');
+            Route::post('/update', [SatuanController::class, 'update'])->name('satuan.update');
+            Route::get('/delete/{id}', [SatuanController::class, 'destroy'])->name('satuan.delete');
         });
 
         // lokasi Routes

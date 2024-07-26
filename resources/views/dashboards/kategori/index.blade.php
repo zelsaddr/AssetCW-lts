@@ -27,7 +27,7 @@
               <div class="modal-content">
                 <form action="{{ route('kategori.store') }}" method="POST">
                   <div class="modal-header">
-                    <h5 class="modal-title">Edit Kategori</h5>
+                    <h5 class="modal-title">Tambah Kategori</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -134,28 +134,6 @@
       modal.find('.modal-body input[name="id"]').val(ids);
       modal.find('.modal-body #kodeKategori').val(kodeKategori);
       modal.find('.modal-body #namaKategori').val(namaKategori);
-    });
-
-    // delete kategori with confirmation pop up basic 
-    $('#delete').on('click', function (e) {
-      var form = $(this).closest('form');
-      e.preventDefault();
-      alert('Data yang dihapus tidak dapat dikembalikan!');
-      // basic confirmation pop up using sweetalert2
-      // Swal.fire({
-      //   title: 'Apakah Anda Yakin?',
-      //   text: "Data yang dihapus tidak dapat dikembalikan!",
-      //   icon: 'warning',
-      //   showCancelButton: true,
-      //   confirmButtonColor: '#3085d6',
-      //   cancelButtonColor: '#d33',
-      //   confirmButtonText: 'Ya, Hapus!',
-      //   cancelButtonText: 'Batal'
-      // }).then((result) => {
-      //   if (result.isConfirmed) {
-      //     form.submit();
-      //   }
-      // });
     });
   });
 </script>
