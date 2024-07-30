@@ -86,7 +86,9 @@
               <tr>
                 <td>{{ $s['nama_satuan'] }}</td>
                 <td>
-                  <button type="button" data-bs-toggle="modal" data-bs-target="#editSatuan" data-id="{{ $s['id'] }}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button></td>
+                  <button type="button" data-bs-toggle="modal" data-bs-target="#editSatuan" data-id="{{ $s['id'] }}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button>
+                  <a href="{{ route('satuan.delete', $s['id']) }}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i class="bi bi-trash"></i></a>
+                </td>
               </tr>
               @endforeach
             </tbody>

@@ -52,7 +52,8 @@ Route::group(['prefix' => 'main'], function () {
 
         // subkategori Routes
         Route::group(['prefix' => 'barang'], function() {
-            Route::get('/', [BarangController::class, 'index']);
+            Route::get('/', [BarangController::class, 'index'])->name('barang.index');
+            Route::post('/store', [BarangController::class, 'store'])->name('barang.store');
         });
 
         // satuan Routes
