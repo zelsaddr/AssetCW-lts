@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2024 at 11:55 AM
+-- Generation Time: Jul 31, 2024 at 12:58 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -31,6 +31,7 @@ CREATE TABLE `barang` (
   `id` int(11) NOT NULL,
   `kategori_id` int(11) NOT NULL,
   `nama_barang` varchar(255) NOT NULL,
+  `merk_barang` varchar(255) NOT NULL,
   `tahun_perolehan` int(11) NOT NULL,
   `foto_tampak_depan_path` varchar(255) NOT NULL,
   `foto_tampak_samping_path` varchar(255) NOT NULL,
@@ -42,12 +43,8 @@ CREATE TABLE `barang` (
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`id`, `kategori_id`, `nama_barang`, `tahun_perolehan`, `foto_tampak_depan_path`, `foto_tampak_samping_path`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Laptop ASUS', 2020, '/path/to/foto_depan_laptop.jpg', '/path/to/foto_samping_laptop.jpg', '2024-07-18 03:55:47', '2024-07-18 03:55:47'),
-(2, 2, 'Meja Direktur', 2018, '/path/to/foto_depan_meja.jpg', '/path/to/foto_samping_meja.jpg', '2024-07-18 03:55:47', '2024-07-18 03:55:47'),
-(3, 3, 'Mobil Toyota Avanza', 2019, '/path/to/foto_depan_avanza.jpg', '/path/to/foto_samping_avanza.jpg', '2024-07-18 03:55:47', '2024-07-18 03:55:47'),
-(4, 4, 'Excavator CAT', 2015, '/path/to/foto_depan_excavator.jpg', '/path/to/foto_samping_excavator.jpg', '2024-07-18 03:55:47', '2024-07-18 03:55:47'),
-(5, 5, 'Printer HP LaserJet', 2021, '/path/to/foto_depan_printer.jpg', '/path/to/foto_samping_printer.jpg', '2024-07-18 03:55:47', '2024-07-18 03:55:47');
+INSERT INTO `barang` (`id`, `kategori_id`, `nama_barang`, `merk_barang`, `tahun_perolehan`, `foto_tampak_depan_path`, `foto_tampak_samping_path`, `created_at`, `updated_at`) VALUES
+(6, 51, 'Toyota Avanza 2021', 'Toyota', 2024, 'public/foto_tampak_depan/b9xrnkRD5Z0f2UAjlVVfR3CrrsFyYnGI89ArzMcV.jpg', 'public/foto_tampak_samping/oaktabNXkE5S8363d8t87wNS2fZ8DAkXr8nKTQDe.jpg', '2024-07-30 02:18:04', '2024-07-30 02:18:04');
 
 -- --------------------------------------------------------
 
@@ -242,7 +239,7 @@ ALTER TABLE `satuan`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -266,7 +263,7 @@ ALTER TABLE `pengguna_aset`
 -- AUTO_INCREMENT for table `satuan`
 --
 ALTER TABLE `satuan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
