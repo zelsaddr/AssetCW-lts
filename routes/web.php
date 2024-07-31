@@ -54,6 +54,7 @@ Route::group(['prefix' => 'main'], function () {
         Route::group(['prefix' => 'barang'], function() {
             Route::get('/', [BarangController::class, 'index'])->name('barang.index');
             Route::post('/store', [BarangController::class, 'store'])->name('barang.store');
+            Route::post('/update', [BarangController::class, 'update'])->name('barang.update');
         });
 
         // satuan Routes

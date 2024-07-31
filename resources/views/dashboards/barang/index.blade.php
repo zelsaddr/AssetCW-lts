@@ -85,56 +85,65 @@
           <div class="modal fade" id="editItem" tabindex="-1">
             <div class="modal-dialog modal-dialog-scrollable modal-xl modal-dialog-centered">
               <div class="modal-content">
-                <form>
+                <form action="{{ route('barang.update') }}" method="POST" enctype="multipart/form-data">
+                  {{ csrf_field() }}
                   <div class="modal-header">
                     <h5 class="modal-title">Edit Barang</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <div class="row mb-3">
-                      <label for="kodeKategori" class="col-sm-3 col-form-label">Kode Kategori</label>
-                      <div class="col-sm-9">
-                        <select name="edit_id_kategori" id="edit_id_kategori" class="form-control select2-edit" required="" data-select2-id="edit_id_kategori" tabindex="-1" aria-hidden="true">
-                          <option value="" data-select2-id="2">- Pilih --</option>
-                          <option value="2" data-select2-id="11">ELK - ELEKTRONIK</option>
-                          <option value="3" data-select2-id="12">FNT - FURNITURE</option>
-                          <option value="4" data-select2-id="13">OA - Office Accessories</option>
-                        </select>
+                      <div class="row mb-3">
+                        <label for="kodeKategori" class="col-sm-3 col-form-label">Kode Kategori</label>
+                        <div class="col-sm-9">
+                          <select name="kategori_id_2" id="kategori_id_2" class="form-control select2-edit" required="" data-select2-id="kategori_id_2" tabindex="-1" aria-hidden="true">
+                            <option value="">- Pilih --</option>
+                            @foreach ($kategoris as $kategori)
+                            <option value="{{ $kategori['id'] }}" >{{ $kategori['kode_kategori'] }} - {{ $kategori['nama_kategori'] }}</option>
+                            @endforeach
+                          </select>
+                        </div>
                       </div>
-                    </div>
-                    <div class="row mb-3">
-                      <label for="namaKategori" class="col-sm-3 col-form-label">Nama Barang</label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="namaKategori" placeholder="Nama Barang">
+                      <div class="row mb-3">
+                        <label for="namaBarang" class="col-sm-3 col-form-label">Nama Barang</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="namaBarang" name="nama_barang" placeholder="Nama Barang">
+                        </div>
                       </div>
-                    </div>
-                    <div class="row mb-3">
-                      <label for="namaKategori" class="col-sm-3 col-form-label">Merk</label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="namaKategori" placeholder="LG">
+                      <div class="row mb-3">
+                        <label for="merkBarang" class="col-sm-3 col-form-label">Merk</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="merkBarang" name="merk_barang" placeholder="LG">
+                        </div>
                       </div>
-                    </div>
-                    <div class="row mb-3">
-                      <label for="namaKategori" class="col-sm-3 col-form-label">Tahun Perolehan</label>
-                      <div class="col-sm-9">
-                        <input type="number" class="form-control" id="namaKategori" placeholder="20XX">
+                      <div class="row mb-3">
+                        <label for="tahunPerolehan" class="col-sm-3 col-form-label">Tahun Perolehan</label>
+                        <div class="col-sm-9">
+                          <input type="number" class="form-control" id="tahunPerolehan" name="tahun_perolehan" placeholder="20XX">
+                        </div>
                       </div>
-                    </div>
-                    <!-- Input type file foto tampak depan -->
-                    <div class="row mb-3">
-                      <label for="namaKategori" class="col-sm-3 col-form-label">Foto Tampak Depan</label>
-                      <div class="col-sm-9">
-                        <input type="file" class="form-control" id="namaKategori">
+                      <!-- Input type file foto tampak depan -->
+                      <div class="row mb-3">
+                        <label for="fotoDepan" class="col-sm-3 col-form-label">Foto Tampak Depan</label>
+                        <div class="col-sm-9">
+                          <input type="file" class="form-control" id="fotoDepan" name="foto_tampak_depan">
+                        </div>
+                        <!-- preview previous image -->
+                        <div class="col-sm-9 offset-sm-3">
+                          <img src="" alt="" id="preview_depan" class="img-fluid" width="100">
+                        </div>
                       </div>
-                    </div>
-                    <!-- Input type file foto tampak samping -->
-                    <div class="row mb-3">
-                      <label for="namaKategori" class="col-sm-3 col-form-label">Foto Tampak Samping</label>
-                      <div class="col-sm-9">
-                        <input type="file" class="form-control" id="namaKategori">
+                      <!-- Input type file foto tampak samping -->
+                      <div class="row mb-3">
+                        <label for="fotoSamping" class="col-sm-3 col-form-label">Foto Tampak Samping</label>
+                        <div class="col-sm-9">
+                          <input type="file" class="form-control" id="fotoSamping" name="foto_tampak_samping">
+                        </div>
+                        <!-- preview previous image -->
+                        <div class="col-sm-9 offset-sm-3">
+                          <img src="" alt="" id="preview_samping" class="img-fluid" width="100">
+                        </div>
                       </div>
-                    </div>
-                </div>
+                  </div>
                   <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Simpan</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -154,12 +163,15 @@
                 <th>Nama Barang</th>
                 <th>Merk</th>
                 <th>Tahun Perolehan</th>
-                <th>Foto</th>
+                <th>Tampak Depan</th>
+                <th>Tampak Samping</th>
                 <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
-              {{ $i = 1; }}
+              @php
+                $i = 1;
+              @endphp
               @foreach ($barangs as $barang)
                 <tr>
                   <td>{{ $i }}</td>
@@ -167,10 +179,13 @@
                   <td>{{ $barang['nama_barang'] }}</td>
                   <td>{{ $barang['merk_barang'] }}</td>
                   <td>{{ $barang['tahun_perolehan'] }}</td>
-                  <td><img src="{{ url(str_replace('public/', 'storage/', $barang['foto_tampak_depan_path'])) }}" alt="{{ $barang['nama_barang'] }}" class="img-fluid" width="100"></td>
-                  <td><button type="button" data-bs-toggle="modal" data-bs-target="#editItem" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button></td>
+                  <td><img src="{{ url(str_replace('public/', 'storage/', $barang['foto_tampak_depan_path'])) }}" alt="{{ $barang['nama_barang'] }}w" class="img-fluid" width="100"></td>
+                  <td><img src="{{ url(str_replace('public/', 'storage/', $barang['foto_tampak_samping_path'])) }}" alt="{{ $barang['nama_barang'] }}w" class="img-fluid" width="100"></td>
+                  <td><button type="button" data-id="{{ $barang['id'] }}" data-bs-toggle="modal" data-bs-target="#editItem" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button></td>
                 </tr>
-              {{ $i++; }}
+              @php
+                $i++;
+              @endphp
               @endforeach
             </tbody>
           </table>
@@ -179,5 +194,34 @@
         </div>
       </div>
 </div>
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#editItem').on('show.bs.modal', function(event) {
+      var button = $(event.relatedTarget);
+      var id = button.data('id');
+      var kategoriName = button.closest('tr').find('td:eq(1)').text();
+      var namaBarang = button.closest('tr').find('td:eq(2)').text();
+      var merkBarang = button.closest('tr').find('td:eq(3)').text();
+      var tahunPerolehan = button.closest('tr').find('td:eq(4)').text();
+      var fotoDepan = button.closest('tr').find('td:eq(5)').find('img').attr('src');
+      var fotoSamping = button.closest('tr').find('td:eq(6)').find('img').attr('src');
+      var modal = $(this);
+      // default select with text between option
+      modal.find('.modal-body select[name="kategori_id_2"] option').filter(function() {
+        return ($(this).text() == kategoriName);
+      }).prop('selected', true);
+      $('select').trigger('change');
+      modal.find('.modal-body input[name="nama_barang"]').val(namaBarang);
+      modal.find('.modal-body input[name="merk_barang"]').val(merkBarang);
+      modal.find('.modal-body input[name="tahun_perolehan"]').val(tahunPerolehan);
+      modal.find('.modal-body img#preview_depan').attr('src', fotoDepan);
+      modal.find('.modal-body img#preview_samping').attr('src', fotoSamping);
+      
+    });
+  });
+</script>
 @endsection
 

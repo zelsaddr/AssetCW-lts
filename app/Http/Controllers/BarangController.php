@@ -41,4 +41,41 @@ class BarangController extends Controller
             return redirect()->route('barang.index')->with('error', 'Barang gagal ditambahkan');
         }
     }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'kategori_id' => 'required',
+            'nama_barang' => 'required',
+            'merk_barang' => 'required',
+            'tahun_perolehan' => 'required',
+        ]);
+        $barang = Barang::find($request->id);
+        if ($request->hasFile('foto_tampak_depan')) {
+            $request->validate([
+                'foto_tampak_depan' => 'required|file|image|mimes:jpeg,png,jpg',
+            ]);
+            // upload foto_tampak_depan (make filename randomized) to public path then update to database
+            $foto_tampak_depan_path = $request->file('foto_tampak_depan')->store('public/foto_tampak_depan');
+            $barang->foto_tampak_depan_path = $foto_tampak_depan_path;
+        }
+        if ($request->hasFile('foto_tampak_samping')) {
+            $request->validate([
+                'foto_tampak_samping' => 'required|file|image|mimes:jpeg,png,jpg',
+            ]);
+            // upload foto_tampak_samping (make filename randomized) to public path then update to database
+            $foto_tampak_samping_path = $request->file('foto_tampak_samping')->store('public/foto_tampak_samping');
+            $barang->foto_tampak_samping_path = $foto_tampak_samping_path;
+        }
+        $barang->kategori_id = $request->kategori_id;
+        $barang->nama_barang = $request->nama_barang;
+        $barang->merk_barang = $request->merk_barang;
+        $barang->tahun_perolehan = $request->tahun_perolehan;
+        $save = $barang->save();
+        if (!$save) {
+            return redirect()->route('barang.index')->with('error', 'Barang gagal diubah');
+        }
+        return redirect()->route('barang.index')->with('success', 'Barang berhasil diubah');
+    }
 }
