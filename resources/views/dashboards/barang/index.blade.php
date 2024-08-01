@@ -63,14 +63,14 @@
                       <div class="row mb-3">
                         <label for="fotoDepan" class="col-sm-3 col-form-label">Foto Tampak Depan</label>
                         <div class="col-sm-9">
-                          <input type="file" class="form-control" id="fotoDepan" name="foto_tampak_depan">
+                          <input type="file" class="form-control" id="fotoDepan" name="foto_tampak_depan" accept=".jpg,.png,.jpeg">
                         </div>
                       </div>
                       <!-- Input type file foto tampak samping -->
                       <div class="row mb-3">
                         <label for="fotoSamping" class="col-sm-3 col-form-label">Foto Tampak Samping</label>
                         <div class="col-sm-9">
-                          <input type="file" class="form-control" id="fotoSamping" name="foto_tampak_samping">
+                          <input type="file" class="form-control" id="fotoSamping" name="foto_tampak_samping" accept=".jpg,.png,.jpeg">
                         </div>
                       </div>
                   </div>
@@ -92,6 +92,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
+                      <input type="hidden" name="id" value="">
                       <div class="row mb-3">
                         <label for="kodeKategori" class="col-sm-3 col-form-label">Kode Kategori</label>
                         <div class="col-sm-9">
@@ -125,7 +126,7 @@
                       <div class="row mb-3">
                         <label for="fotoDepan" class="col-sm-3 col-form-label">Foto Tampak Depan</label>
                         <div class="col-sm-9">
-                          <input type="file" class="form-control" id="fotoDepan" name="foto_tampak_depan">
+                          <input type="file" class="form-control" id="fotoDepan" name="foto_tampak_depan" accept=".jpg,.png,.jpeg">
                         </div>
                         <!-- preview previous image -->
                         <div class="col-sm-9 offset-sm-3">
@@ -136,7 +137,7 @@
                       <div class="row mb-3">
                         <label for="fotoSamping" class="col-sm-3 col-form-label">Foto Tampak Samping</label>
                         <div class="col-sm-9">
-                          <input type="file" class="form-control" id="fotoSamping" name="foto_tampak_samping">
+                          <input type="file" class="form-control" id="fotoSamping" name="foto_tampak_samping" accept=".jpg,.png,.jpeg">
                         </div>
                         <!-- preview previous image -->
                         <div class="col-sm-9 offset-sm-3">
@@ -162,9 +163,10 @@
                 <th>Kategori</th>
                 <th>Nama Barang</th>
                 <th>Merk</th>
-                <th>Tahun Perolehan</th>
-                <th>Tampak Depan</th>
-                <th>Tampak Samping</th>
+                <th>Thn Perolehan</th>
+                <th>Tpk Depan</th>
+                <th>Tpk Samping</th>
+                <th>Tercatat Sbg Aset</th>
                 <th>Aksi</th>
               </tr>
             </thead>
@@ -181,7 +183,11 @@
                   <td>{{ $barang['tahun_perolehan'] }}</td>
                   <td><img src="{{ url(str_replace('public/', 'storage/', $barang['foto_tampak_depan_path'])) }}" alt="{{ $barang['nama_barang'] }}w" class="img-fluid" width="100"></td>
                   <td><img src="{{ url(str_replace('public/', 'storage/', $barang['foto_tampak_samping_path'])) }}" alt="{{ $barang['nama_barang'] }}w" class="img-fluid" width="100"></td>
-                  <td><button type="button" data-id="{{ $barang['id'] }}" data-bs-toggle="modal" data-bs-target="#editItem" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button></td>
+                  <td>Tidak</td>
+                  <td>
+                    <button type="button" data-id="{{ $barang['id'] }}" data-bs-toggle="modal" data-bs-target="#editItem" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button>
+                    <a href="{{ route('barang.delete', $barang['id']) }}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i class="bi bi-trash"></i></a>
+                  </td>
                 </tr>
               @php
                 $i++;
@@ -214,6 +220,7 @@
         return ($(this).text() == kategoriName);
       }).prop('selected', true);
       $('select').trigger('change');
+      modal.find('.modal-body input[name="id"]').val(id);
       modal.find('.modal-body input[name="nama_barang"]').val(namaBarang);
       modal.find('.modal-body input[name="merk_barang"]').val(merkBarang);
       modal.find('.modal-body input[name="tahun_perolehan"]').val(tahunPerolehan);

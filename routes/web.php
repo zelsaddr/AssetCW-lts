@@ -55,6 +55,7 @@ Route::group(['prefix' => 'main'], function () {
             Route::get('/', [BarangController::class, 'index'])->name('barang.index');
             Route::post('/store', [BarangController::class, 'store'])->name('barang.store');
             Route::post('/update', [BarangController::class, 'update'])->name('barang.update');
+            Route::get('/delete/{id}', [BarangController::class, 'destroy'])->name('barang.delete');
         });
 
         // satuan Routes
@@ -67,12 +68,18 @@ Route::group(['prefix' => 'main'], function () {
 
         // lokasi Routes
         Route::group(['prefix' => 'lokasi'], function() {
-            Route::get('/', [LokasiController::class, 'index']);
+            Route::get('/', [LokasiController::class, 'index'])->name('lokasi.index');
+            Route::post('/store', [LokasiController::class, 'store'])->name('lokasi.store');
+            Route::post('/update', [LokasiController::class, 'update'])->name('lokasi.update');
+            Route::get('/delete/{id}', [LokasiController::class, 'destroy'])->name('lokasi.delete');
         });
 
         // pengguna Routes
         Route::group(['prefix' => 'pengguna'], function() {
-            Route::get('/', [PenggunaController::class, 'index']);
+            Route::get('/', [PenggunaController::class, 'index'])->name('pengguna.index');
+            Route::post('/store', [PenggunaController::class, 'store'])->name('pengguna.store');
+            Route::post('/update', [PenggunaController::class, 'update'])->name('pengguna.update');
+            Route::get('/delete/{id}', [PenggunaController::class, 'destroy'])->name('pengguna.delete');
         });
     });
     // aset Routes

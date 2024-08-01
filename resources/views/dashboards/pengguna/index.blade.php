@@ -75,25 +75,19 @@
               <tr>
                 <th data-type="string"><b>Nama</b> Pengguna</th>
                 <th>Jabatan</th>
+                <th>Posisi</th>
                 <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
+              @foreach ($penggunas as $pengguna)
               <tr>
-                <td>Izzeldin Addarda</td>
-                <td>Officer Arsip & Asset</td>
+                <td>{{ $pengguna['nama_pengguna'] }}</td>
+                <td>{{ $pengguna['jabatan'] }}</td>
+                <td>{{ $pengguna['posisi_pengguna'] }}</td>
                 <td><button type="button" data-bs-toggle="modal" data-bs-target="#editPengguna" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button></td>
               </tr>
-              <tr>
-                <td>Romario Mardiansyah</td>
-                <td>Officer Rumah Tangga Kantor</td>
-                <td><button type="button" data-bs-toggle="modal" data-bs-target="#editPengguna" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button></td>
-              </tr>
-              <tr>
-                <td>Rizki Purnama</td>
-                <td>Senior Officer USDM</td>
-                <td><button type="button" data-bs-toggle="modal" data-bs-target="#editPengguna" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button></td>
-              </tr>
+              @endforeach
             </tbody>
           </table>
           <!-- End Table with stripped rows -->
