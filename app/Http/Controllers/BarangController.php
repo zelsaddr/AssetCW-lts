@@ -11,7 +11,14 @@ class BarangController extends Controller
     public function index()
     {
         $kategoris = Kategori::all();
-        $barangs = Barang::with('kategori')->get();
+        // $barangs = Barang::with('kategori')->get();
+        $barangs = Barang::with('aset', 'kategori')
+        ->get()
+        ->map(function ($barang) {
+            $barang->status = $barang->aset->isEmpty() ? 'tidak_tercatat' : 'tercatat';
+            return $barang;
+        });
+        // print($barangs);
         return view('dashboards.barang.index', compact('barangs', 'kategoris'));
     }
 

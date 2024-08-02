@@ -24,4 +24,9 @@ class Barang extends Model
     {
         return $this->belongsTo(Kategori::class, 'kategori_id');
     }
+
+    public function aset()
+    {
+        return $this->hasMany(Aset::class, 'barang_id');
+    }
 }

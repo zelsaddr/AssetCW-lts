@@ -183,7 +183,7 @@
                   <td>{{ $barang['tahun_perolehan'] }}</td>
                   <td><img src="{{ url(str_replace('public/', 'storage/', $barang['foto_tampak_depan_path'])) }}" alt="{{ $barang['nama_barang'] }}w" class="img-fluid" width="100"></td>
                   <td><img src="{{ url(str_replace('public/', 'storage/', $barang['foto_tampak_samping_path'])) }}" alt="{{ $barang['nama_barang'] }}w" class="img-fluid" width="100"></td>
-                  <td>Tidak</td>
+                  <td>{{ $barang['status'] == "tidak_tercatat" ? "Tidak" : "Ya" }}</td>
                   <td>
                     <button type="button" data-id="{{ $barang['id'] }}" data-bs-toggle="modal" data-bs-target="#editItem" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button>
                     <a href="{{ route('barang.delete', $barang['id']) }}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i class="bi bi-trash"></i></a>

@@ -85,7 +85,8 @@ Route::group(['prefix' => 'main'], function () {
     // aset Routes
     Route::group(['prefix' => 'aset'], function() {
         Route::group(['prefix' => 'berwujud'], function() {
-            Route::get('/', [AsetBerwujudController::class, 'index']);
+            Route::get('/', [AsetBerwujudController::class, 'index'])->name('aset-berwujud.index');
+            Route::post('/store', [AsetBerwujudController::class, 'store'])->name('aset-berwujud.store');
         });
         Route::group(['prefix' => 'dihapuskan'], function() {
             Route::get('/', [AsetDihapuskanController::class, 'index']);
