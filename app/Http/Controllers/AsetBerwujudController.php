@@ -73,4 +73,5 @@ class AsetBerwujudController extends Controller
         Aset::create($data);
         return redirect()->route('aset-berwujud.index')->with('success', 'Aset berhasil ditambahkan');
     }
+
 }
