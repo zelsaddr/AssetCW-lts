@@ -13,7 +13,8 @@ class AsetBerwujudController extends Controller
 {
     public function index()
     {
-        $barangs = Barang::doesntHave('aset')->get();
+        $barangs = Barang::doesntHave('aset')->with('kategori')->get();
+        // print($barangs);
         $penggunas = PenggunaAset::all();
         $satuans = Satuan::all();
         $lokasis = LokasiAset::all();
@@ -74,4 +75,35 @@ class AsetBerwujudController extends Controller
         return redirect()->route('aset-berwujud.index')->with('success', 'Aset berhasil ditambahkan');
     }
 
+    public function getKodeAsetByBarang($id)
+    {
+        $findOrfail = Barang::findOrFail($id);
+        if (!$findOrfail) {
+            return response()->json(['message' => 'Barang tidak ditemukan'], 404);
+        }
+        $get_kode_kategori_from_barang = Barang::join('kategori', 'barang.kategori_id', '=', 'kategori.id')
+            ->select('kategori.kode_kategori')
+            ->where('barang.id', $id)->first();
+        $get_all_kode_aset = Aset::join('barang', 'aset.barang_id', '=', 'barang.id')
+            ->join('kategori', 'barang.kategori_id', '=', 'kategori.id')
+            ->select('aset.kode_aset', 'barang.nama_barang', 'kategori.nama_kategori', 'kategori.kode_kategori')
+            ->where('kategori.kode_kategori', $get_kode_kategori_from_barang['kode_kategori'])->get();
+        $kode_aset_higher = 0;
+        $prefix_awal = '';
+        foreach ($get_all_kode_aset as $aset) {
+            $kode_kategori = explode('-', explode('.', $aset['kode_aset'])[0])[1];
+            if ($kode_kategori > $kode_aset_higher) {
+                $kode_aset_higher = $kode_kategori;
+                $prefix_awal = explode('-', explode('.', $aset['kode_aset'])[0])[0];
+            }
+        }
+        if ($kode_aset_higher == 0) {
+            $expl = explode('-', $get_kode_kategori_from_barang['kode_kategori']);
+            $kode_aset_higher = $expl[1];
+            $prefix_awal = $expl[0];
+        }
+        $kode_aset_higher += 1;
+        $kode_aset_for_new_item = $prefix_awal . '-' . $kode_aset_higher . '.';
+        return response()->json(['kode_aset' => $kode_aset_for_new_item]);
+    }
 }

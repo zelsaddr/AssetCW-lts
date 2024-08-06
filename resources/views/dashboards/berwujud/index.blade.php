@@ -42,9 +42,22 @@
                           <select name="nama_aset" id="nama_aset" class="form-control select2-add" required="" data-select2-id="nama_aset" tabindex="-1" aria-hidden="true">
                             <option value="">- Pilih --</option>
                             @foreach ($barangs as $barang)
-                            <option value="{{ $barang['id'] }}">{{ $barang['nama_barang'] }}</option>
+                            <option value="{{ $barang['id'] }}">{{ $barang['nama_barang'] }} | {{ $barang['kategori']['nama_kategori'] }}</option>
                             @endforeach
                           </select>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <label for="tanggal_barang_datang" class="col-sm-3 col-form-label">Tanggal Barang Datang (*)</label>
+                        <div class="col-sm-9">
+                          <input type="date" class="form-control" id="tanggal_barang_datang" name="tanggal_barang_datang">
+                        </div>
+                      </div>
+                      <!-- kode aset -->
+                      <div class="row mb-3">
+                        <label for="kode_aset" class="col-sm-3 col-form-label">Kode Aset (*)</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="kode_aset" name="kode_aset" placeholder="Kode Aset">
                         </div>
                       </div>
                       <div class="row mb-3">
@@ -85,12 +98,6 @@
                             <option value="Renovasi">Renovasi</option>
                             <option value="Rusak">Rusak</option>     
                           </select>
-                        </div>
-                      </div>
-                      <div class="row mb-3">
-                        <label for="tanggal_barang_datang" class="col-sm-3 col-form-label">Tanggal Barang Datang (*)</label>
-                        <div class="col-sm-9">
-                          <input type="date" class="form-control" id="tanggal_barang_datang" name="tanggal_barang_datang">
                         </div>
                       </div>
                       <div class="row mb-3">
@@ -200,3 +207,41 @@
 </div>
 @endsection
 
+@section('scripts')
+<script type="text/javascript">
+  $(document).ready(function() {
+    let prefix_kode_aset = '';
+    // get select value on change in modal add
+    $('#nama_aset').on('change', function() {
+      var nama_aset = $(this).val();
+      if (nama_aset) {
+        $.ajax({
+          url: "{{ url('main/aset/berwujud/api/get-kode-aset-by-barang/') }}/" + nama_aset,
+          type: "GET",
+          dataType: "json",
+          success: function(data) {
+            $('#kode_aset').empty();
+            prefix_kode_aset = data.kode_aset;
+            $('#kode_aset').val(data.kode_aset);
+          }
+        });
+      } else {
+        $('#kode_aset').empty();
+      }
+    });
+
+    $('#tanggal_barang_datang').on('change', function() {
+      var date = new Date($(this).val());
+      var day = ("0" + date.getDate()).slice(-2);
+      var month = ("0" + (date.getMonth() + 1)).slice(-2);
+      var year = date.getFullYear();
+      var kode_aset = prefix_kode_aset;
+      $('#kode_aset').val(kode_aset + [day, month, year].join('.'));
+    });
+
+    $('#kode_aset').on('change', function(){
+      prefix_kode_aset = ($(this).val()).split('.');
+    })
+  });
+</script>
+@endsection
