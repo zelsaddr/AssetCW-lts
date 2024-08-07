@@ -8,6 +8,8 @@ use App\Models\PenggunaAset;
 use App\Models\Satuan;
 use App\Models\LokasiAset;
 use App\Models\Aset;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class AsetBerwujudController extends Controller
 {
@@ -29,16 +31,22 @@ class AsetBerwujudController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $validator = Validator::make($request->all(), [
             'nama_aset' => 'required',
             'tanggal_barang_datang' => 'required',
-            'foto_barang_path' => 'required|file|image|mimes:png,jpg,jpeg',
+            'foto_barang_path' => 'required|file|image|mimes:png,jpg,jpeg,webp',
+            'volume_barang' => 'required',
             'nama_pengguna' => 'required',
             'satuan' => 'required',
             'kondisi' => 'required',
             'lokasi_aset' => 'required',
             'keterangan' => 'required'
         ]);
+        if ($validator->fails()) {
+            return redirect()->route('aset-berwujud.index')->with('error', 'Data yang dimasukkan tidak valid');
+        }
+
+        $data = $request->all();
         // join data aset berwujud with barang and kategori table
         $get_kode_kategori_from_barang = Barang::join('kategori', 'barang.kategori_id', '=', 'kategori.id')
             ->select('kategori.kode_kategori')
@@ -69,6 +77,7 @@ class AsetBerwujudController extends Controller
         $data['lokasi_aset_id'] = $request->lokasi_aset;
         $data['nilai_perolehan'] = $request->nilai_perolehan;
         $data['kode_aset'] = $kode_aset_for_new_item;
+        $data['volume'] = $request->volume_barang;
         // simpan foto barang
         $data['foto_barang_path'] = $request->file('foto_barang_path')->store('assets/aset-berwujud', 'public');
         Aset::create($data);
@@ -105,5 +114,15 @@ class AsetBerwujudController extends Controller
         $kode_aset_higher += 1;
         $kode_aset_for_new_item = $prefix_awal . '-' . $kode_aset_higher . '.';
         return response()->json(['kode_aset' => $kode_aset_for_new_item]);
+    }
+
+    public function destroy($id)
+    {-
+        $aset = Aset::findOrFail($id);
+        if ($aset->foto_barang_path) {
+            Storage::delete($aset->foto_barang_path);
+        }
+        $aset->delete();
+        return redirect()->route('aset-berwujud.index')->with('success', 'Aset berhasil dihapus');
     }
 }

@@ -16,6 +16,7 @@ class Aset extends Model
         'barang_id',
         'kode_aset',
         'identitas_barang',
+        'volume',
         'tanggal_barang_datang',
         'foto_barang_path',
         'pengguna_id',
