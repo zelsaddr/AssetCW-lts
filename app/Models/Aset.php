@@ -50,4 +50,9 @@ class Aset extends Model
     {
         return $this->belongsTo(LokasiAset::class, 'lokasi_aset_id');
     }
+
+    public function dokumen()
+    {
+        return $this->hasOne(Dokumen::class, 'aset_id');
+    }
 }

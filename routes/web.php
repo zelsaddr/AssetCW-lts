@@ -97,7 +97,10 @@ Route::group(['prefix' => 'main'], function () {
     // dokumen Routes
     Route::group(['prefix' => 'dokumen'], function() {
         Route::group(['prefix' => 'pengadaan'], function() {
-            Route::get('/', [DokumenController::class, 'index']);
+            Route::get('/', [DokumenController::class, 'index'])->name('dokumen-pengadaan.index');
+            Route::post('/store', [DokumenController::class, 'store'])->name('dokumen-pengadaan.store');
+            Route::post('/update', [DokumenController::class, 'update'])->name('dokumen-pengadaan.update');
+            Route::get('/delete/{id}', [DokumenController::class, 'destroy'])->name('dokumen-pengadaan.delete');
         });
     });
 });

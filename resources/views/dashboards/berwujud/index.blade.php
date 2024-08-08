@@ -163,7 +163,7 @@
                       <div class="row mb-3">
                         <label for="nama_aset" class="col-sm-3 col-form-label">Nama Barang (*)</label>
                         <div class="col-sm-9">
-                          <select name="nama_aset" id="nama_aset" class="form-control select2-add" required="" data-select2-id="nama_aset" tabindex="-1" aria-hidden="true">
+                          <select name="nama_aset" id="edit_nama_aset" class="form-control select2-add" required="" data-select2-id="edit_nama_aset" tabindex="-1" aria-hidden="true">
                             <option value="">- Pilih --</option>
                             @foreach ($barangs as $barang)
                             <option value="{{ $barang['id'] }}">{{ $barang['nama_barang'] }} | {{ $barang['kategori']['nama_kategori'] }}</option>
@@ -211,7 +211,7 @@
                       <div class="row mb-3">
                         <label for="kodeKategori" class="col-sm-3 col-form-label">Satuan (*)</label>
                         <div class="col-sm-9">
-                          <select name="satuan" id="satuan" class="form-control select2-add" required="" data-select2-id="satuan" tabindex="-1" aria-hidden="true">
+                          <select name="satuan" id="edit_satuan" class="form-control select2-add" required="" data-select2-id="edit_satuan" tabindex="-1" aria-hidden="true">
                             <option value="" >- Pilih --</option>
                             @foreach ($satuans as $satuan)
                               <option value="{{ $satuan['id'] }}">{{ $satuan['nama_satuan'] }}</option>
@@ -233,7 +233,7 @@
                       <div class="row mb-3">
                         <label for="kodeKategori" class="col-sm-3 col-form-label">Nama Pengguna (*)</label>
                         <div class="col-sm-9">
-                          <select name="nama_pengguna" id="nama_pengguna" class="form-control select2-add" required="" data-select2-id="nama_pengguna" tabindex="-1" aria-hidden="true">
+                          <select name="nama_pengguna" id="edit_nama_pengguna" class="form-control select2-add" required="" data-select2-id="edit_nama_pengguna" tabindex="-1" aria-hidden="true">
                             <option value="">- Pilih --</option>
                             @foreach ($penggunas as $pengguna)
                             <option value="{{ $pengguna['id'] }}">{{ $pengguna['nama_pengguna'] }} - {{ $pengguna['jabatan'] }} | {{ $pengguna['posisi_pengguna'] }}</option>
@@ -245,7 +245,7 @@
                       <div class="row mb-3">
                         <label for="lokasi_aset" class="col-sm-3 col-form-label">Lokasi Aset (*)</label>
                         <div class="col-sm-9">
-                          <select name="lokasi_aset" id="lokasi_aset" class="form-control select2-add" required="" data-select2-id="lokasi_aset" tabindex="-1" aria-hidden="true">
+                          <select name="lokasi_aset" id="edit_lokasi_aset" class="form-control select2-add" required="" data-select2-id="edit_lokasi_aset" tabindex="-1" aria-hidden="true">
                             <option value="">- Pilih --</option>
                             @foreach ($lokasis as $lokasi)
                             <option value="{{ $lokasi['id'] }}">{{ $lokasi['nama_lokasi'] }}</option> 
@@ -281,6 +281,7 @@
                 <th>Tanggal Datang</th>
                 <th>Lokasi</th>
                 <th>Kondisi</th>
+                <th>Dokumen Aset</th>
                 <th>Pengguna</th>
                 <th>Aksi</th>
               </tr>
@@ -298,6 +299,7 @@
                 <td>{{ $aset['tanggal_barang_datang'] }}</td>
                 <td>{{ $aset['nama_lokasi'] }}</td>
                 <td>{{ $aset['kondisi'] }}</td>
+                <td>N/A</td>
                 <td>{{ $aset['nama_pengguna'] }}</td>
                 <td>
                   <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editItem"><i class="bi bi-pencil-square"></i> Edit</button>

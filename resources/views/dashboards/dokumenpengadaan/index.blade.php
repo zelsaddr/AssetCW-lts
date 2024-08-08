@@ -4,34 +4,48 @@
 
 @section('content')
 <div class="col-lg-12">
+  @if (session('success'))
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{ session('success') }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  @endif
+  {{-- if session error display message gagal update data --}}
+  @if (session('error'))
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>{{ session('error') }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  @endif
     <div class="card">
         <div class="card-body">
           <h3 class="card-title">Dokumen Pengadaan <button type="button" data-bs-toggle="modal" data-bs-target="#addItem" class="btn btn-block btn-success btn-sm float-end"><i class="bi bi-plus-square"></i> Dokumen Pengadaan</button></h3>
           <div class="modal fade" id="addItem" tabindex="-1">
             <div class="modal-dialog modal-dialog-scrollable modal-xl modal-dialog-centered">
               <div class="modal-content">
-                <form>
+                <form action="{{ route('dokumen-pengadaan.store') }}" method="POST" enctype="multipart/form-data">
                   <div class="modal-header">
                     <h5 class="modal-title">Tambah Dokumen Pengadaan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
+                     {{ csrf_field() }}
                       <div class="row mb-3">
-                        <label for="kodeKategori" class="col-sm-3 col-form-label">Nama Aset</label>
+                        <label for="nama_aset" class="col-sm-3 col-form-label">Nama Aset</label>
                         <div class="col-sm-9">
-                          <select name="id_kategori" id="id_kategori" class="form-control select2-add" required="" data-select2-id="id_kategori" tabindex="-1" aria-hidden="true">
-                            <option value="" data-select2-id="2">- Pilih --</option>
-                            <option value="2" data-select2-id="11">ELK - ELEKTRONIK</option>
-                            <option value="3" data-select2-id="12">FNT - FURNITURE</option>
-                            <option value="4" data-select2-id="13">OA - Office Accessories</option>
+                          <select name="aset_id" id="nama_aset" class="form-control select2-add" required="" data-select2-id="nama_aset" tabindex="-1" aria-hidden="true">
+                            <option value="">- Pilih --</option>
+                            @foreach ($semua_aset as $aset)
+                              <option value="{{ $aset['id'] }}">{{ $aset['barang']['nama_barang'] }}</option>
+                            @endforeach
                           </select>
                         </div>
                       </div>
                       <!-- Input type file foto tampak depan -->
                       <div class="row mb-3">
-                        <label for="namaKategori" class="col-sm-3 col-form-label">Dokumen Pengadaan</label>
+                        <label for="upload_dokumen" class="col-sm-3 col-form-label">Dokumen Pengadaan</label>
                         <div class="col-sm-9">
-                          <input type="file" class="form-control" id="namaKategori">
+                          <input type="file" class="form-control" id="upload_dokumen" name="dokumen_upload">
                         </div>
                       </div>
                   </div>
@@ -94,14 +108,21 @@
               </tr>
             </thead>
             <tbody>
+              @php
+                $no = 1;
+              @endphp
+              @foreach ($semua_dokumen as $dokumen)
               <tr>
-                <td>1</td>
-                <td>Lemari Buffet</td>
-                <td>Pembelian Lemari Buffet.pdf</td>
-                <td>ACW-13000.13.04.2024</td>
-                <td>2019</td>
-                <td><button type="button" data-bs-toggle="modal" data-bs-target="#editItem" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button></td>
+                <td>{{ $no++ }}</td>
+                <td>{{ $dokumen['nama_barang'] }}</td>
+                <td>{{ $dokumen['dokumen_uploaded_path'] }}</td>
+                <td>{{ $dokumen['kode_aset'] }}</td>
+                <td>{{ $dokumen['tahun_perolehan'] }}</td>
+                <td>
+                  <button type="button" data-bs-toggle="modal" data-bs-target="#editItem" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> Edit</button>
+                </td>
               </tr>
+              @endforeach
             </tbody>
           </table>
           <!-- End Table with stripped rows -->
