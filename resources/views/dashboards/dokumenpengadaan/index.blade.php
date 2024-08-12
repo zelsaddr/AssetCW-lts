@@ -93,6 +93,24 @@
               </div>
             </div>
           </div>
+
+          <!-- create modal preview pdf file while clicked "preview" button -->
+          <div class="modal fade" id="previewPdf" tabindex="-1">
+            <div class="modal-dialog modal-dialog-scrollable modal-xl modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Preview Dokumen Pengadaan</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <embed src="http://127.0.0.1:8000/storage/dokumen_pengadaan/srw8mW98SqUBizjUuJGTs65v91buGj4WYoypNPbe.pdf" type="application/pdf" width="100%" height="600px">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Preview Dokumen Pengadaan Modal-->
           <p>Semua dokumen pengadaan akan ditampilkan di sini.</p>
           <hr>
           <!-- Table with stripped rows -->
@@ -115,7 +133,10 @@
               <tr>
                 <td>{{ $no++ }}</td>
                 <td>{{ $dokumen['nama_barang'] }}</td>
-                <td>{{ $dokumen['dokumen_uploaded_path'] }}</td>
+                <td>
+                  <!-- button trigger modal preview pdf file -->
+                  <button type="button" data-bs-toggle="modal" data-bs-target="#previewPdf" data-src="{{ $dokumen['dokumen_uploaded_path'] }}" class="btn btn-primary btn-sm previewPdf"><i class="bi bi-eye"></i> Preview</button>
+                </td>
                 <td>{{ $dokumen['kode_aset'] }}</td>
                 <td>{{ $dokumen['tahun_perolehan'] }}</td>
                 <td>
@@ -130,5 +151,16 @@
         </div>
       </div>
 </div>
+@endsection
+
+@section('js')
+<script>
+  $(document).ready(function() {
+    // $('.previewPdf').click(function() {
+    //   var src = $(this).data('src');
+    //   $('#previewPdf embed').attr('src', 'src');
+    // });
+  })
+</script>
 @endsection
 
