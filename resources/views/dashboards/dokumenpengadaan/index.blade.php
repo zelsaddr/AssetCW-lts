@@ -156,10 +156,7 @@
 @section('js')
 <script>
   $(document).ready(function() {
-    // $('.previewPdf').click(function() {
-    //   var src = $(this).data('src');
-    //   $('#previewPdf embed').attr('src', 'src');
-    // });
+                            
   })
 </script>
 @endsection
