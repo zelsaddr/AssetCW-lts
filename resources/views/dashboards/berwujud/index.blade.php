@@ -294,16 +294,18 @@
               <tr>
                 <td>{{ $no++ }}</td>
                 <td>{{ $aset['kode_aset'] }} </td>
-                <td>{{ $aset['nama_kategori'] }}</td>
-                <td>{{ $aset['nama_barang'] }}</td>
+                <td>{{ $aset['kategori']['nama_kategori'] }}</td>
+                <td>{{ $aset['barang']['nama_barang'] }}</td>
                 <td>{{ $aset['tanggal_barang_datang'] }}</td>
                 <td>{{ $aset['nama_lokasi'] }}</td>
                 <td>{{ $aset['kondisi'] }}</td>
-                <td>N/A</td>
-                <td>{{ $aset['nama_pengguna'] }}</td>
+                <td>{{ $aset['dokumen_status'] }}</td>
+                <td>{{ $aset['pengguna']['nama_pengguna'] }}</td>
                 <td>
                   <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editItem"><i class="bi bi-pencil-square"></i> Edit</button>
+                  @if($aset['dokumen_status'] == 'N/A')
                   <a href="{{ route('aset-berwujud.delete', $aset['id']) }}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini secara permanen?')"><i class="bi bi-trash"></i> Hapus</a>
+                  @endif
                 </td>
               @endforeach
             </tbody>

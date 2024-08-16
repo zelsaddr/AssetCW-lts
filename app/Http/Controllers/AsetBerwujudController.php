@@ -20,12 +20,12 @@ class AsetBerwujudController extends Controller
         $penggunas = PenggunaAset::all();
         $satuans = Satuan::all();
         $lokasis = LokasiAset::all();
-        $asets = Aset::join('barang', 'aset.barang_id', '=', 'barang.id')
-            ->join('kategori', 'barang.kategori_id', '=', 'kategori.id')
-            ->join('lokasi_aset', 'aset.lokasi_aset_id', '=', 'lokasi_aset.id')
-            ->join('pengguna_aset', 'aset.pengguna_id', '=', 'pengguna_aset.id')
-            ->select('aset.*', 'barang.nama_barang', 'kategori.nama_kategori', 'kategori.kode_kategori', 'lokasi_aset.nama_lokasi', 'pengguna_aset.nama_pengguna')
-            ->get();
+        $asets = Aset::with('barang', 'lokasiAset', 'pengguna', 'satuan', 'dokumen')->get()->map(function ($aset) {
+            $aset->dokumen_status = $aset->dokumen->isEmpty() ? 'N/A' : 'Ada';
+            $aset->kategori = $aset->barang->kategori;
+            $aset->nama_lokasi = $aset->lokasiAset->nama_lokasi;
+            return $aset;
+        });
         return view('dashboards.berwujud.index', compact('barangs', 'penggunas', 'satuans', 'lokasis', 'asets'));
     }
 
@@ -38,6 +38,7 @@ class AsetBerwujudController extends Controller
             'volume_barang' => 'required',
             'nama_pengguna' => 'required',
             'satuan' => 'required',
+            'kode_aset' => 'nullable',
             'kondisi' => 'required',
             'lokasi_aset' => 'required',
             'keterangan' => 'required'
@@ -55,28 +56,32 @@ class AsetBerwujudController extends Controller
             ->join('kategori', 'barang.kategori_id', '=', 'kategori.id')
             ->select('aset.kode_aset', 'barang.nama_barang', 'kategori.nama_kategori', 'kategori.kode_kategori')
             ->where('kategori.kode_kategori', $get_kode_kategori_from_barang['kode_kategori'])->get();
-        $kode_aset_higher = 0;
-        $prefix_awal = '';
-        foreach ($get_all_kode_aset as $aset) {
-            $kode_kategori = explode('-', explode('.', $aset['kode_aset'])[0])[1];
-            if ($kode_kategori > $kode_aset_higher) {
-                $kode_aset_higher = $kode_kategori;
-                $prefix_awal = explode('-', explode('.', $aset['kode_aset'])[0])[0];
+        if ($request->kode_aset) {
+            $data['kode_aset'] = $request->kode_aset;
+        } else{ 
+            $kode_aset_higher = 0;
+            $prefix_awal = '';
+            foreach ($get_all_kode_aset as $aset) {
+                $kode_kategori = explode('-', explode('.', $aset['kode_aset'])[0])[1];
+                if ($kode_kategori > $kode_aset_higher) {
+                    $kode_aset_higher = $kode_kategori;
+                    $prefix_awal = explode('-', explode('.', $aset['kode_aset'])[0])[0];
+                }
             }
+            if ($kode_aset_higher == 0) {
+                $expl = explode('-', $get_kode_kategori_from_barang['kode_kategori']);
+                $kode_aset_higher = $expl[1];
+                $prefix_awal = $expl[0];
+            }
+            $kode_aset_higher += 1;
+            $kode_aset_for_new_item = $prefix_awal . '-' . $kode_aset_higher . '.' . date('d.m.Y', strtotime($request->tanggal_barang_datang));
+            $data['kode_aset'] = $kode_aset_for_new_item;
         }
-        if ($kode_aset_higher == 0) {
-            $expl = explode('-', $get_kode_kategori_from_barang['kode_kategori']);
-            $kode_aset_higher = $expl[1];
-            $prefix_awal = $expl[0];
-        }
-        $kode_aset_higher += 1;
-        $kode_aset_for_new_item = $prefix_awal . '-' . $kode_aset_higher . '.' . date('d.m.Y', strtotime($request->tanggal_barang_datang));
         $data['barang_id'] = $request->nama_aset;
         $data['pengguna_id'] = $request->nama_pengguna;
         $data['satuan_id'] = $request->satuan;
         $data['lokasi_aset_id'] = $request->lokasi_aset;
         $data['nilai_perolehan'] = $request->nilai_perolehan;
-        $data['kode_aset'] = $kode_aset_for_new_item;
         $data['volume'] = $request->volume_barang;
         // simpan foto barang
         $data['foto_barang_path'] = $request->file('foto_barang_path')->store('assets/aset-berwujud', 'public');
@@ -117,8 +122,9 @@ class AsetBerwujudController extends Controller
     }
 
     public function destroy($id)
-    {-
-        $aset = Aset::findOrFail($id);
+    {
+        $aset = Aset::findOrFail(['aset_id' => $id])->first();
+        // print($aset);
         if ($aset->foto_barang_path) {
             Storage::delete($aset->foto_barang_path);
         }

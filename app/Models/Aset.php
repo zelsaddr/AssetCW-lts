@@ -53,6 +53,7 @@ class Aset extends Model
 
     public function dokumen()
     {
-        return $this->hasOne(Dokumen::class, 'aset_id');
+        return $this->hasMany(Dokumen::class, 'aset_id');
     }
+
 }
