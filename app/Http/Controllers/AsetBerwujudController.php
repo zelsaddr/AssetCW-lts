@@ -131,4 +131,6 @@ class AsetBerwujudController extends Controller
         $aset->delete();
         return redirect()->route('aset-berwujud.index')->with('success', 'Aset berhasil dihapus');
     }
+
+    
 }

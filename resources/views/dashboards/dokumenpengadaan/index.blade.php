@@ -103,7 +103,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <embed src="http://127.0.0.1:8000/storage/dokumen_pengadaan/srw8mW98SqUBizjUuJGTs65v91buGj4WYoypNPbe.pdf" type="application/pdf" width="100%" height="600px">
+                  <embed src="" type="application/pdf" width="100%" height="600px">
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -135,7 +135,7 @@
                 <td>{{ $dokumen['nama_barang'] }}</td>
                 <td>
                   <!-- button trigger modal preview pdf file -->
-                  <button type="button" data-bs-toggle="modal" data-bs-target="#previewPdf" data-src="{{ $dokumen['dokumen_uploaded_path'] }}" class="btn btn-primary btn-sm previewPdf"><i class="bi bi-eye"></i> Preview</button>
+                  <button type="button" id="#previewPdf" data-src="{{ $dokumen['dokumen_uploaded_path'] }}" class="btn btn-primary btn-sm previewPdf"><i class="bi bi-eye"></i> Preview</button>
                 </td>
                 <td>{{ $dokumen['kode_aset'] }}</td>
                 <td>{{ $dokumen['tahun_perolehan'] }}</td>
@@ -156,8 +156,12 @@
 @section('js')
 <script>
   $(document).ready(function() {
-                            
-  })
+     $('.previewPdf').click(function() {
+       var src = $(this).data('src');
+      //  $('#previewPdf embed').attr('src', src);
+       $('#previewPdf').modal('show');
+     });
+  });
 </script>
 @endsection
 
