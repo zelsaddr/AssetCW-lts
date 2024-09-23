@@ -59,20 +59,6 @@
                           <input type="number" class="form-control" id="tahunPerolehan" name="tahun_perolehan" placeholder="20XX">
                         </div>
                       </div>
-                      <!-- Input type file foto tampak depan -->
-                      <div class="row mb-3">
-                        <label for="fotoDepan" class="col-sm-3 col-form-label">Foto Tampak Depan</label>
-                        <div class="col-sm-9">
-                          <input type="file" class="form-control" id="fotoDepan" name="foto_tampak_depan" accept=".jpg,.png,.jpeg">
-                        </div>
-                      </div>
-                      <!-- Input type file foto tampak samping -->
-                      <div class="row mb-3">
-                        <label for="fotoSamping" class="col-sm-3 col-form-label">Foto Tampak Samping</label>
-                        <div class="col-sm-9">
-                          <input type="file" class="form-control" id="fotoSamping" name="foto_tampak_samping" accept=".jpg,.png,.jpeg">
-                        </div>
-                      </div>
                   </div>
                   <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Simpan</button>
@@ -122,28 +108,6 @@
                           <input type="number" class="form-control" id="tahunPerolehan" name="tahun_perolehan" placeholder="20XX">
                         </div>
                       </div>
-                      <!-- Input type file foto tampak depan -->
-                      <div class="row mb-3">
-                        <label for="fotoDepan" class="col-sm-3 col-form-label">Foto Tampak Depan</label>
-                        <div class="col-sm-9">
-                          <input type="file" class="form-control" id="fotoDepan" name="foto_tampak_depan" accept=".jpg,.png,.jpeg">
-                        </div>
-                        <!-- preview previous image -->
-                        <div class="col-sm-9 offset-sm-3">
-                          <img src="" alt="" id="preview_depan" class="img-fluid" width="100">
-                        </div>
-                      </div>
-                      <!-- Input type file foto tampak samping -->
-                      <div class="row mb-3">
-                        <label for="fotoSamping" class="col-sm-3 col-form-label">Foto Tampak Samping</label>
-                        <div class="col-sm-9">
-                          <input type="file" class="form-control" id="fotoSamping" name="foto_tampak_samping" accept=".jpg,.png,.jpeg">
-                        </div>
-                        <!-- preview previous image -->
-                        <div class="col-sm-9 offset-sm-3">
-                          <img src="" alt="" id="preview_samping" class="img-fluid" width="100">
-                        </div>
-                      </div>
                   </div>
                   <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Simpan</button>
@@ -164,8 +128,6 @@
                 <th>Nama Barang</th>
                 <th>Merk</th>
                 <th>Thn Perolehan</th>
-                <th>Tpk Depan</th>
-                <th>Tpk Samping</th>
                 <th>Tercatat Sbg Aset</th>
                 <th>Aksi</th>
               </tr>
@@ -181,8 +143,6 @@
                   <td>{{ $barang['nama_barang'] }}</td>
                   <td>{{ $barang['merk_barang'] }}</td>
                   <td>{{ $barang['tahun_perolehan'] }}</td>
-                  <td><img src="{{ url(str_replace('public/', 'storage/', $barang['foto_tampak_depan_path'])) }}" alt="{{ $barang['nama_barang'] }}w" class="img-fluid" width="100"></td>
-                  <td><img src="{{ url(str_replace('public/', 'storage/', $barang['foto_tampak_samping_path'])) }}" alt="{{ $barang['nama_barang'] }}w" class="img-fluid" width="100"></td>
                   <td>{{ $barang['status'] == "tidak_tercatat" ? "Tidak" : "Ya" }}</td>
                   <td>
                     <button type="button" data-id="{{ $barang['id'] }}" data-bs-toggle="modal" data-bs-target="#editItem" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button>
@@ -212,8 +172,6 @@
       var namaBarang = button.closest('tr').find('td:eq(2)').text();
       var merkBarang = button.closest('tr').find('td:eq(3)').text();
       var tahunPerolehan = button.closest('tr').find('td:eq(4)').text();
-      var fotoDepan = button.closest('tr').find('td:eq(5)').find('img').attr('src');
-      var fotoSamping = button.closest('tr').find('td:eq(6)').find('img').attr('src');
       var modal = $(this);
       // default select with text between option
       modal.find('.modal-body select[name="kategori_id_2"] option').filter(function() {
@@ -224,9 +182,6 @@
       modal.find('.modal-body input[name="nama_barang"]').val(namaBarang);
       modal.find('.modal-body input[name="merk_barang"]').val(merkBarang);
       modal.find('.modal-body input[name="tahun_perolehan"]').val(tahunPerolehan);
-      modal.find('.modal-body img#preview_depan').attr('src', fotoDepan);
-      modal.find('.modal-body img#preview_samping').attr('src', fotoSamping);
-      
     });
   });
 </script>

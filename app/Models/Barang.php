@@ -15,8 +15,6 @@ class Barang extends Model
         'nama_barang',
         'merk_barang',
         'tahun_perolehan',
-        'foto_tampak_depan_path',
-        'foto_tampak_samping_path',
     ];
 
     // Define relationships
