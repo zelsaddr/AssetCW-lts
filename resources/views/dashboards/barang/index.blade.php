@@ -23,7 +23,7 @@
           <div class="modal fade" id="addItem" tabindex="-1">
             <div class="modal-dialog modal-dialog-scrollable modal-xl modal-dialog-centered">
               <div class="modal-content">
-                <form action="{{ route('barang.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('barang.store') }}" method="POST">
                   {{ csrf_field() }}
                   <div class="modal-header">
                     <h5 class="modal-title">Tambah Barang</h5>
@@ -71,7 +71,7 @@
           <div class="modal fade" id="editItem" tabindex="-1">
             <div class="modal-dialog modal-dialog-scrollable modal-xl modal-dialog-centered">
               <div class="modal-content">
-                <form action="{{ route('barang.update') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('barang.update') }}" method="POST">
                   {{ csrf_field() }}
                   <div class="modal-header">
                     <h5 class="modal-title">Edit Barang</h5>

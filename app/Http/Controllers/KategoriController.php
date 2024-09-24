@@ -40,4 +40,12 @@ class KategoriController extends Controller
         $kategori->delete();
         return redirect()->route('kategori.index')->with('success', 'Kategori berhasil dihapus');
     }
+
+    public function getKodeKategori(Request $request)
+    {
+        // get by query
+        $query = $request->query('q');
+        $kategori = Kategori::where('kode_kategori', 'like', "%$query%")->get();
+        return response()->json($kategori);
+    }
 }
