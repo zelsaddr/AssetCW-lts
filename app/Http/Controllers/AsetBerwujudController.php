@@ -115,8 +115,10 @@ class AsetBerwujudController extends Controller
             $expl = explode('-', $get_kode_kategori_from_barang['kode_kategori']);
             $kode_aset_higher = $expl[1];
             $prefix_awal = $expl[0];
+            echo $kode_aset_higher;
         }
         $kode_aset_higher += 1;
+        // echo $kode_aset_higher;
         $kode_aset_for_new_item = $prefix_awal . '-' . $kode_aset_higher . '.';
         return response()->json(['kode_aset' => $kode_aset_for_new_item]);
     }
