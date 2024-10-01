@@ -73,6 +73,7 @@ Route::group(['prefix' => 'main'], function () {
             Route::post('/store', [LokasiController::class, 'store'])->name('lokasi.store');
             Route::post('/update', [LokasiController::class, 'update'])->name('lokasi.update');
             Route::get('/delete/{id}', [LokasiController::class, 'destroy'])->name('lokasi.delete');
+            Route::get('/getIdLokasiByQuery', [LokasiController::class, 'getKodeLokasi'])->name('lokasi.getKodeLokasi');
         });
 
         // pengguna Routes

@@ -55,4 +55,13 @@ class LokasiController extends Controller
             return redirect()->route('lokasi.index')->with('error', 'Lokasi gagal dihapus');
         }
     }
+
+    public function getKodeLokasi(Request $request)
+    {
+        $lokasis = $request->input('lokasi');
+        $lokasi = LokasiAset::where(
+            'nama_lokasi', 'like', '%' . $lokasis . '%'
+        )->first();
+        return response()->json($lokasi);
+    }
 }

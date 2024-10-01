@@ -115,10 +115,16 @@ class AsetBerwujudController extends Controller
             $expl = explode('-', $get_kode_kategori_from_barang['kode_kategori']);
             $kode_aset_higher = $expl[1];
             $prefix_awal = $expl[0];
-            echo $kode_aset_higher;
         }
-        $kode_aset_higher += 1;
-        // echo $kode_aset_higher;
+        // Gunakan regex untuk mencari angka (3-4 digit) dalam $kode_kategori
+        preg_match("/(\d{3,4})/i", $kode_aset_higher, $match);
+
+        // Ambil angka yang ditemukan dan tambahkan 1
+        $angka_baru = str_pad((int)$match[1] + 1, strlen($match[1]), '0', STR_PAD_LEFT);
+
+        // Gantikan angka lama dengan angka baru
+        $kode_aset_higher = str_replace($match[1], $angka_baru, $kode_aset_higher);
+
         $kode_aset_for_new_item = $prefix_awal . '-' . $kode_aset_higher . '.';
         return response()->json(['kode_aset' => $kode_aset_for_new_item]);
     }
