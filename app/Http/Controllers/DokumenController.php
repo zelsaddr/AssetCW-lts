@@ -92,7 +92,7 @@ class DokumenController extends Controller
         $dokumen->delete();
         return redirect()->route('dokumen-pengadaan.index')->with('success', 'Dokumen berhasil dihapus');
     }
-
+    
     public function reportPdf()
     {
         $semua_dokumen = Dokumen::join('aset', 'dokumen.aset_id', '=', 'aset.id')
