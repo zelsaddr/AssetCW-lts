@@ -12,6 +12,8 @@ use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\AsetBerwujudController;
 use App\Http\Controllers\AsetDihapuskanController;
 use App\Http\Controllers\DokumenController;
+use App\Http\Controllers\PublicController;
+use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,15 +26,16 @@ use App\Http\Controllers\DokumenController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PublicController::class, 'index']);
+Route::get('/items', [ItemController::class, 'index'])->name('items.index');
 
 Route::group(['prefix' => 'auth'], function () {
-    Route::get('login', [AuthController::class, 'index']);
+    Route::get('login', [AuthController::class, 'index'])->name('login');
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::group(['prefix' => 'main'], function () {
+Route::group(['prefix' => 'main', 'middleware' => 'auth'], function () {
     // Data Master Routes
     Route::get('/', function () {
         return view('dashboards.index');
